@@ -1,0 +1,42 @@
+{
+
+  "manifest_version": 2,
+  "name": "Canvas Addons",
+  "version": "2.0.0",
+
+  "description": "Addons to improve canvas by instructure",
+
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png",
+    "256": "icons/icon-256.png"
+  },
+
+  "permissions": [
+    "https://*.instructure.com/*",
+    "activeTab",
+    "storage",
+    "webRequest"
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/icon-48.png",
+    "default_title": "Canvas Addons",
+    "default_popup": "popup/addons.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [ "https://*.instructure.com/*" ],
+      "run_at": "document_start",
+      "js": [ "libs/browser-polyfill.js", "libs/jquery.js", "scripts/addon-loader.js" ]
+    }
+  ],
+
+  "web_accessible_resources": [
+    "addons/*",
+    "libs/*"
+  ]
+
+}
