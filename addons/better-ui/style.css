@@ -1,0 +1,49 @@
+/* dashboard */
+.ic-DashboardCard {
+    border-radius: 15px;
+    position: relative;
+}
+  
+.ic-DashboardCard::after {
+    content: "";
+    
+    pointer-events: none;
+    border: #0002 4px solid;
+    box-sizing: border-box;
+    border-radius: 15px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+  
+.ic-DashboardCard__link {
+    position: absolute;
+    max-width: 90%;
+    bottom: 15px;
+    left: 0;
+}
+  
+.ic-DashboardCard__header_content {
+    background-color: transparent;
+    font-size: 0.8em;
+}
+  
+.ic-DashboardCard__header_content > *,
+.ic-DashboardCard__header-title > span {
+    color: white !important;
+}
+  
+.ic-DashboardCard__action-container {
+    position: absolute;
+    display: flex;
+    left: 25px;
+    top: 10px;
+    gap: 0.5em;
+}
+  
+.ic-DashboardCard__action-container svg {
+    stroke-width: 5px;
+    fill: white;
+}

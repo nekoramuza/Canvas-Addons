@@ -1,3 +1,3 @@
 import addonApi from "/addon-api/core.js"
 
-addonApi.injectCss('dark-mode')
+addonApi.injectCss('better-ui')

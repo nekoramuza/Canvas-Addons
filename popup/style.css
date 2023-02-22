@@ -79,6 +79,10 @@ body {
     transition: .4s;
 }
 
+input:disabled + .slider {
+    filter: brightness(60%);
+}
+
 input:checked + .slider {
     background-color: var(--primary);
 }

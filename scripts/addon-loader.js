@@ -3,7 +3,7 @@ console.log("Loading Canvas Addons!")
 $.getJSON(chrome.extension.getURL('/addons/addons.json'), async function(addons) {
     var storage = await browser.storage.local.get()
 
-    addons.forEach(async addon => {
+    addons.forEach(await async function(addon) {
         var enabled = false        
         if (storage[addon] === undefined) {
             storage[addon] = enabled
@@ -12,7 +12,14 @@ $.getJSON(chrome.extension.getURL('/addons/addons.json'), async function(addons)
             enabled = storage[addon]
 
         if (enabled) {
-            var userscript = import(browser.extension.getURL(`/addons/${addon}/userscript.js`))
+            try {
+                var userscript = await import(browser.runtime.getURL(`/addons/${addon}/userscript.js`))
+            } catch (e) {
+                if (e) {
+                    console.error(`Failed to load ${addon} userscript!`)
+                    console.error(e)
+                }
+            }
         }
 
         console.log(`${addon} loaded!`)
