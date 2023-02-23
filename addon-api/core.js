@@ -4,8 +4,16 @@
 
 var addonApi = {}
 
-addonApi.injectCss = function (addonId) {
-    $('head').append(`<link rel="stylesheet" href="${browser.runtime.getURL(`/addons/${addonId}/style.css`)}">`)
+class Instance {
+    constructor(addon) {
+        this.addon = addon
+    }
+
+    injectCss() {
+        $('head').append(`<link rel="stylesheet" href="${browser.runtime.getURL(`/addons/${this.addon.id}/style.css`)}">`)
+    }
 }
 
-export default addonApi
+export {
+    Instance
+}

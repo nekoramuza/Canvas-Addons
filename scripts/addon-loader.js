@@ -1,27 +1,38 @@
-console.log("Loading Canvas Addons!")
-
-$.getJSON(chrome.extension.getURL('/addons/addons.json'), async function(addons) {
+(async function() {
     var storage = await browser.storage.local.get()
 
-    addons.forEach(await async function(addon) {
-        var enabled = false        
-        if (storage[addon] === undefined) {
-            storage[addon] = enabled
-            browser.storage.local.set(storage)
-        } else
-            enabled = storage[addon]
+    class Addon {
+        constructor(id) {
+            let Addon = this
+            Addon.id = id
 
-        if (enabled) {
-            try {
-                var userscript = await import(browser.runtime.getURL(`/addons/${addon}/userscript.js`))
-            } catch (e) {
-                if (e) {
-                    console.error(`Failed to load ${addon} userscript!`)
-                    console.error(e)
-                }
-            }
+            this.addon = import(browser.runtime.getURL(`/addons/${id}/addon.js`))
+            .then(function(addon) {
+                Addon.name = addon.info.name
+                Addon.description = addon.info.description
+                Addon.version = addon.info.version
+                Addon.settings = addon.info.settings
+
+                Addon.init = addon.main.init
+                Addon.start = addon.main.start
+            })
         }
 
-        console.log(`${addon} loaded!`)
+        async start(addon, parameters) {
+            await this.addon
+            this.start(addon, parameters)
+        }
+    }
+
+    $.getJSON(chrome.extension.getURL('/addons/addons.json'), async function(addons) {
+        var storage = await browser.storage.local.get()
+
+        addons.forEach(await async function(id) {
+            if (storage[id].enabled) {
+                var addon = new Addon(id);
+
+                addon.start(addon, storage[id].settings)
+            }
+        });
     });
-});
+})()

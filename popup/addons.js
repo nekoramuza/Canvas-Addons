@@ -7,45 +7,76 @@ $('#version').text(`${manifest.name} - Version ${manifest.version}`)
 $.getJSON(browser.runtime.getURL('/addons/addons.json'), async function(addons) {
     var storage = await browser.storage.local.get()
 
-    addons.forEach(addon => {
-        var enabled = false
-        if (storage[addon] === undefined) {
-            storage[addon] = enabled
+    addons.forEach(async id => {
+        var addonObj = {
+            enabled: false,
+            settings: {}
+        }
+
+        if (storage[id].enabled === undefined) {
+            storage[id] = addonObj
             browser.storage.local.set(storage)
         } else
-            enabled = storage[addon]
+            addonObj = storage[id]
+        
+        await import(browser.runtime.getURL(`/addons/${id}/addon.js`))
+        .then(await function(addon) {
+            var info = addon.info
 
-        $.getJSON(browser.runtime.getURL(`/addons/${addon}/addon.json`), function(data) {
-            if (data.forceEnabled) {
-                storage[addon] = true
-                enabled = true
-                browser.storage.local.set(storage)
-            }
-
-            var e = $(`<div class="addon">
-                <b>${data.name} v${data.version}</b>
-                <span>${data.description}</span>
+            var addonElement = $(`<div class="addon">
+                <h2>${info.name} v${info.version}</h2>
+                <span>${info.description}</span>
             </div>`)
+
+            addonList.append(addonElement)
 
             var toggleSwitch = $(`<label class="switch">
                 <span class="slider round"></span>
             </label>`)
 
             var toggle = $('<input type="checkbox">')
-            
-            toggle.prop("checked", storage[addon])
 
-            if (!data.forceEnabled)
-                toggle.change(function() {
-                    storage[addon] = toggle.is(":checked")
+            var settings = $(`<div id="settings"></div>`)
+
+            Object.keys(info.settings).forEach(setting => {
+                var settingObj = info.settings[setting]
+                var value = storage[id].settings[setting]
+
+                if (value === undefined) {
+                    storage[id].settings[setting] = settingObj.default
+                    value = settingObj.default
+                }
+
+                var settingDiv = $(`<div class="setting">
+                    <b>${setting}</b>
+                </div>`)
+
+                var settingInput = $(`<input type="${settingObj.type}" value="${value}">`)
+
+                settingInput.change(function() {
+                    addonObj.settings[setting] = settingInput.val()
+                    storage[id].settings[setting] = settingInput.val()
                     browser.storage.local.set(storage)
                 })
-            else
-                toggle.prop("disabled", true)
+
+                settingDiv.append(settingInput)
+                settings.append(settingDiv)
+            })
+            
+            toggle.prop("checked", storage[id].enabled)
+
+            toggle.change(function() {
+                storage[id].enabled = toggle.is(":checked")
+                browser.storage.local.set(storage)
+            })
 
             toggleSwitch.prepend(toggle)
-            e.append(toggleSwitch)
-            addonList.append(e)
-        });
+            addonElement.append(toggleSwitch)
+
+            if (Object.keys(info.settings).length > 0) {
+                addonElement.append($(`<h2>Settings</h2>`))
+                addonElement.append(settings)
+            }
+        })
     });
 });

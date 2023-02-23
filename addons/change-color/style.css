@@ -1,0 +1,19 @@
+:root {
+    --ic-brand-global-nav-bgd: var(--change-primary-color);
+    --ic-brand-button--primary-bgd-darkened-15: var(--change-primary-color);
+    --ic-brand-button--primary-bgd-darkened-5: var(--change-primary-color);
+    --ic-brand-primary: var(--change-primary-color);
+    --fQfxa-primaryBorderColor: var(--change-primary-color) !important;
+    --fQfxa-primaryBackground: var(--change-primary-color) !important;
+    --fQfxa-primaryHoverBackground: var(--change-primary-color) !important;
+    --fQfxa-primaryActiveBackground: var(--change-primary-color) !important;
+    --ic-brand-global-nav-logo-bgd: var(--change-primary-color);
+    --ic-link-color: var(--change-primary-color);
+    --ic-link-color-darkened-10: var(--change-primary-color);
+    --fbyHH-color: var(--change-primary-color) !important;
+    --fbyHH-hoverColor: var(--change-primary-color) !important;
+    --dLyYq-infoColor: var(--change-primary-color) !important;
+    --ic-brand-global-nav-menu-item__text-color--active: var(--change-primary-color);
+    --eMdva-infoBorderColor: var(--change-primary-color) !important;
+    --sJGfW-activeBackground: var(--change-primary-color) !important;
+}

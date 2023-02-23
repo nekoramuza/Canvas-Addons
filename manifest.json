@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "Canvas Addons",
-  "version": "2.0.1",
+  "version": "2.1.0",
 
   "description": "Addons to improve canvas by instructure",
 
@@ -26,13 +26,7 @@
   "content_scripts": [
     {
       "matches": [ "https://*.instructure.com/*" ],
-      "run_at": "document_start",
-      "js": [ "libs/browser-polyfill.js", "libs/jquery.js" ]
-    },
-    {
-      "matches": [ "https://*.instructure.com/*" ],
-      "run_at": "document_start",
-      "js": [ "scripts/addon-loader.js" ]
+      "js": [ "libs/browser-polyfill.js", "libs/jquery.js", "scripts/addon-loader.js" ]
     }
   ],
 
