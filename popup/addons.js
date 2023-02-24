@@ -4,6 +4,11 @@ var manifest = browser.runtime.getManifest()
 
 $('#version').text(`${manifest.name} - Version ${manifest.version}`)
 
+$('#reset').click(function() {
+    chrome.storage.local.clear()
+    close()
+})
+
 $.getJSON(browser.runtime.getURL('/addons/addons.json'), async function(addons) {
     var storage = await browser.storage.local.get()
 
@@ -13,7 +18,7 @@ $.getJSON(browser.runtime.getURL('/addons/addons.json'), async function(addons) 
             settings: {}
         }
 
-        if (storage[id].enabled === undefined) {
+        if (storage[id] === undefined) {
             storage[id] = addonObj
             browser.storage.local.set(storage)
         } else
@@ -45,10 +50,11 @@ $.getJSON(browser.runtime.getURL('/addons/addons.json'), async function(addons) 
                 if (value === undefined) {
                     storage[id].settings[setting] = settingObj.default
                     value = settingObj.default
+                    browser.storage.local.set(storage)
                 }
 
                 var settingDiv = $(`<div class="setting">
-                    <b>${setting}</b>
+                    <b>${settingObj.label}</b>
                 </div>`)
 
                 var settingInput = $(`<input type="${settingObj.type}" value="${value}">`)

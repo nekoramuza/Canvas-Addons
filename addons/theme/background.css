@@ -1,0 +1,69 @@
+:root {
+    --color-dark-primary: white;
+    --color-dark-secondary: lightgray;
+    --fLzZc-background: var(--background-color-dark);
+    --fOyUs-backgroundPrimary: var(--background-color-dark);
+    --dpCPB-background: var(--background-color-dark);
+    --XOwIb-secondarySelectedBackground: var(--background-color-dark);
+    --cAqHo-background: var(--background-color-dark);
+    --fLzZc-background: var(--background-color-dark);
+    --ic-brand-font-color-dark: var(--color-dark-primary);
+    --enRcg-secondaryColor: var(--color-dark-primary);
+    --fOyUs-color: var(--color-dark-primary);
+    --fCrpb-color: var(--color-dark-primary);
+    --XOwIb-secondaryColor: var(--color-dark-primary);
+    --jpyTq-color: var(--color-dark-primary);
+    --XOwIb-secondarySelectedColor: var(--color-dark-primary);
+    --ic-brand-font-color-dark-lightened-28: var(--color-dark-primary);
+    --ctrLD-color: var(--color-dark-secondary);
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 5px;
+}
+
+#right-side .events_list .event-details:after,
+#right-side .events_list .todo-details:after,
+#right-side .to-do-list .event-details:after,
+#right-side .to-do-list .todo-details:after {
+    background: none;
+}
+
+.list-view a.active {
+    color: var(--color-dark-primary);
+}
+
+#right-side .right-side-list li em,
+#right-side .right-side-list li p {
+    color: var(--color-dark-secondary);
+}
+
+body, #breadcrumbs,
+.ic-Dashboard-header__layout,
+.ic-DashboardCard__header_content,
+.ic-DashboardCard,
+.header-bar,
+.ic-app-header__menu-list-item.ic-app-header__menu-list-item--active .ic-app-header__menu-list-link, .ColorPicker__Container,
+#calendar-list-holder,
+#other-calendars-list-holder,
+#undated-events,
+#minical,
+#calendar-app .fc-month-view .fc-body,
+#calendar-drag-and-drop-container .fc-month-view .fc-body {
+    background: var(--background-color-dark);
+}
+
+.btn,
+.Button,
+.ui-button,
+.btn:hover,
+.Button:hover,
+.ui-button:hover {
+    background: var(--background-color-dark);
+    color: var(--color-dark-primary);
+}

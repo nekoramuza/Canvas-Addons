@@ -28,6 +28,9 @@
         var storage = await browser.storage.local.get()
 
         addons.forEach(await async function(id) {
+            if (!storage[id])
+                return;
+
             if (storage[id].enabled) {
                 var addon = new Addon(id);
 

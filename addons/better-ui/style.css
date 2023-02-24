@@ -1,4 +1,21 @@
 /* dashboard */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    filter: brightness(70%);
+}
+
 .ic-DashboardCard {
     border-radius: 15px;
     position: relative;

@@ -9,8 +9,8 @@ class Instance {
         this.addon = addon
     }
 
-    injectCss() {
-        $('head').append(`<link rel="stylesheet" href="${browser.runtime.getURL(`/addons/${this.addon.id}/style.css`)}">`)
+    injectCss(stylesheet = "style.css") {
+        $('head').append(`<link rel="stylesheet" href="${browser.runtime.getURL(`/addons/${this.addon.id}/${stylesheet}`)}">`)
     }
 }
 
