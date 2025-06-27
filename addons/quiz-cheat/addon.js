@@ -28,7 +28,7 @@ export const main = {
 
         // make a link that opens in a new tab
         function makeLink(text, label = 'Lookup') {
-            return $(`<a class="canvas_cheat btn btn-primary" href="https://google.com/search?q=${urlify(text)}" target="_blank">${label}</a>`)
+            return $(`<a class="canvas_cheat btn btn-primary" href="https://google.com/search?q=${encodeURIComponent?.(text) || escape(text)}" target="_blank">${label}</a>`)
         }
 
         // make a link that copies the text to the clipboard
@@ -41,12 +41,6 @@ export const main = {
             var noenter = text.replace(/\n/g, ' ')
             return (deenterify ? noenter : text)
                 .replace(/ +/g, ' ')
-        }
-
-        // make some characters url friendly
-        function urlify(text) {
-            return text.replace(/\"/g, '%22')
-                .replace(/ /g, '%20')
         }
 
         questions.each((i, e) => {
