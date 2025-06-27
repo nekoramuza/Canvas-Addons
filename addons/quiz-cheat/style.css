@@ -1,4 +1,4 @@
-.question_text, .canvas_cheat.btns {
+.question_text, .canvas_help.btns {
     flex-wrap: wrap;
     display: flex;
     gap: 0.5em;

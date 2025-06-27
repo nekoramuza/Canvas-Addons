@@ -7,9 +7,9 @@
 import { Instance } from "/addon-api/core.js"
 
 export const info = {
-    "name": "Quiz Cheat",
-    "description": "A tool that can be used for cheating on canvas quizzes",
-    "version": "1.0.1",
+    "name": "Quiz Tools",
+    "description": "Tools to help when taking quizzes",
+    "version": "1.0.2",
     "settings": {}
 }
 
@@ -28,12 +28,12 @@ export const main = {
 
         // make a link that opens in a new tab
         function makeLink(text, label = 'Lookup') {
-            return $(`<a class="canvas_cheat btn btn-primary" href="https://google.com/search?q=${encodeURIComponent?.(text) || escape(text)}" target="_blank">${label}</a>`)
+            return $(`<a class="canvas_help btn btn-primary" href="https://google.com/search?q=${encodeURIComponent?.(text) || escape(text)}" target="_blank">${label}</a>`)
         }
 
         // make a link that copies the text to the clipboard
         function makeCopyLink(text, label = 'Copy') {
-            return $(`<a class="canvas_cheat copy_text btn btn-primary" href="${text}" target="_blank">${label}</a>`)
+            return $(`<a class="canvas_help copy_text btn btn-primary" href="${text}" target="_blank">${label}</a>`)
         }
 
         // remove extra spaces and newlines
@@ -69,7 +69,7 @@ export const main = {
                 ...answer_text
             ]
 
-            var buttons = $('<div class="canvas_cheat btns"></div>')
+            var buttons = $('<div class="canvas_help btns"></div>')
 
             let lookup = makeLink(normalize(full_question.join(' ')))
             buttons.append(lookup)
